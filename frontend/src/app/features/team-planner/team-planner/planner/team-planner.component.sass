@@ -1,5 +1,8 @@
 @import "helpers"
 
+// This needs to match the resourceAreaWidth in the team planner configuration
+$op-team-planner-resource-width: 180px
+
 \:host
   display: block
   height: 100%
@@ -12,7 +15,7 @@
   grid-template-columns: auto 1fr
   grid-template-rows: auto 1fr auto
   grid-column-gap: 10px
-  grid-template-areas: "addExisting calendar" "addExisting noData" "addExisting addAssignee"
+  grid-template-areas: "addExisting calendar" "addExisting noData" "addExisting footer"
   max-height: 100%
 
   &--add-existing-pane
@@ -22,8 +25,35 @@
   &--calendar
     grid-area: calendar
 
+  &--footer
+    grid-area: footer
+    display: flex
+    margin-top: 1rem
+
   &--add-assignee
-    grid-area: addAssignee
+    width: $op-team-planner-resource-width
+    border-right: 1px solid transparent
+
+  &--remove-dropzone
+    flex: 1
+    border: 1px dashed #1A67A3
+    box-sizing: border-box
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &_active
+      background: #D1E5F5
+
+    &_forbidden
+      border-color: var(--content-form-danger-zone-bg-color)
+
+  &--dropzone-label
+    color: #1A67A3
+
+    &_forbidden
+      color: var(--content-form-danger-zone-bg-color)
 
   &--no-data
     grid-area: noData
@@ -32,6 +62,3 @@
     display: flex
     justify-content: center
     align-items: center
-
-.tp-assignee-add-button
-  margin-top: 1rem
